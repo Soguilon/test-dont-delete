@@ -2,22 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Autoplay MP3 with Interaction</title>
+  <title>Autoplay MP3 from Jukehost</title>
 </head>
 <body>
-  <h1>Click anywhere to play: [COVER] 노아 - ベテルギウス (Betelgeuse)</h1>
-
-  <audio id="bg-music" loop>
-    <source src="https://audio.jukehost.co.uk/jw2plnGEjWGe2vjma4T8Z8sHCtcYhFQV" type="audio/mpeg">
+  <h1>Now Playing: [COVER] 노아 - ベテルギウス (Betelgeuse)</h1>
+  <audio autoplay loop>
+    <source src="https://od.lk/s/MjBfMzM3MTM3OTRf/%5BCOVER%5D%20%EB%85%B8%EC%95%84%20-%20%E3%83%99%E3%83%86%E3%83%AB%E3%82%AE%E3%82%A6%E3%82%B9%20%28Betelgeuse%29%20%28%EC%9B%90%EA%B3%A1%20_%20%E5%84%AA%E9%87%8C%20%28Yuuri%29%29%20%28Covered%20by%20Noah%29%23%ED%94%8C%EB%A0%88%EC%9D%B4%EB%B8%8C%20%23PLAVE.mp3" type="audio/mp3">
     Your browser does not support the audio element.
   </audio>
-
-  <script>
-    document.body.addEventListener('click', function () {
-      const audio = document.getElementById('bg-music');
-      audio.play();
-    }, { once: true });
-  </script>
 </body>
 </html>
-
