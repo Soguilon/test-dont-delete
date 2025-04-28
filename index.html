@@ -2,21 +2,253 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Autoplay Betelgeuse Cover</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Order</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom, #cceeff, #ffffff);
+      padding: 20px;
+      text-align: center;
+      color: #333;
+    }
+
+    h1 {
+      color: #3399ff;
+      font-size: 32px;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 2px #99d9ff;
+    }
+
+    #receipt {
+      width: 100%;
+      max-width: 350px;
+      padding: 20px;
+      margin: 20px auto;
+      background: #ffffffcc;
+      border: 2px solid #99ddff;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+
+    h2, p {
+      margin: 5px 0;
+    }
+
+    .line {
+      border-bottom: 1px dashed #3399ff;
+      margin: 10px 0;
+    }
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      margin: 5px 0;
+    }
+
+    .small {
+      font-size: 12px;
+      margin-top: 10px;
+      color: #555;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #66ccff;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #3399ff;
+    }
+
+    .product-selection {
+      margin-bottom: 15px;
+      text-align: left;
+      width: 90%;
+      max-width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+      background: #ffffffcc;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #cceeff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    label {
+      font-weight: bold;
+      color: #3366cc;
+    }
+
+    input[type="number"], input[type="text"] {
+      width: 60px;
+      padding: 5px;
+      border-radius: 8px;
+      border: 1px solid #66ccff;
+      margin-left: 10px;
+    }
+
+    input[type="text"] {
+      width: 80px;
+    }
+
+    /* Updated logo styles */
+    img.header-logo {
+      max-width: 220px;
+      height: auto;
+      margin-bottom: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    img.circle-logo {
+      max-width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin-top: 20px;
+      border: 5px solid #3399ff;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    /* Mobile friendly adjustments */
+    @media screen and (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+      h1 {
+        font-size: 24px;
+      }
+      #receipt {
+        max-width: 95%;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>Click anywhere to play: [COVER] 노아 - ベテルギウス (Betelgeuse)</h1>
 
-  <audio id="bg-music" loop>
-    <source src="https://od.lk/s/MjBfMzM3MTM3OTRf/%5BCOVER%5D%20%EB%85%B8%EC%95%84%20-%20%E3%83%99%E3%83%86%E3%83%AB%E3%82%AE%E3%82%A6%E3%82%B9%20%28Betelgeuse%29%20%28%EC%9B%90%EA%B3%A1%20_%20%E5%84%AA%E9%87%8C%20%28Yuuri%29%29%20%28Covered%20by%20Noah%29%23%ED%94%8C%EB%A0%88%EC%9D%B4%EB%B8%8C%20%23PLAVE.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
+  <!-- Circular logo (footer) -->
+  <img class="circle-logo" src="https://scontent.fcrk3-2.fna.fbcdn.net/v/t39.30808-6/422825466_122094488636203922_2462579010761666209_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeFEU19_U4Oy_zCQxjiP9PMs8uxhibxL_OPy7GGJvEv84y8S_g-px7eAw6tYN65kd8ZvmaL_puHu5CAzz-ocdpFe&_nc_ohc=ZLDCJ0iektMQ7kNvwHSFXIX&_nc_oc=AdkyNWbLjeR1TxMsso5hjXnvxPWP9FFXSXMvGleqra2EDdi8NL50m6zsVmdaQcmJyp4&_nc_zt=23&_nc_ht=scontent.fcrk3-2.fna&_nc_gid=36CThoRpURUkix32rmw61g&oh=00_AfHIXWyvW-gdxFo2u62EvIS1wzvTqhTRkPxLOFn2sOfqJg&oe=68149BFF" alt="Footer Ice Cream">
+
+  <h1>Order</h1>
+
+  <div id="products">
+    <div class="product-selection">
+      <label>Yogurt</label>
+      <input type="number" id="Yogurt" value="0" min="0">
+      <input type="text" id="YogurtPrice" placeholder="Price" value="50">
+    </div>
+    <div class="product-selection">
+      <label>Vanilla</label>
+      <input type="number" id="Vanilla" value="0" min="0">
+      <input type="text" id="VanillaPrice" placeholder="Price" value="30">
+    </div>
+    <div class="product-selection">
+      <label>Mix</label>
+      <input type="number" id="Mix" value="0" min="0">
+      <input type="text" id="MixPrice" placeholder="Price" value="40">
+    </div>
+  </div>
+
+  <button onclick="submitOrder()">Submit Order</button>
+
+  <div id="receipt" style="display:none;">
+    <h2>❄️ Iglu ❄️</h2>
+    <p id="date"></p>
+    <div class="line"></div>
+    <div id="receipt-items"></div>
+    <div class="line"></div>
+    <div class="item">
+      <strong>Total</strong>
+      <strong id="total-price"></strong>
+    </div>
+    <div class="line"></div>
+    <p class="small">Thank you for cooling off with us! ❄️</p>
+  </div>
+
+  <!-- Circular logo (footer) -->
+  <img class="circle-logo" src="https://scontent.fcrk3-2.fna.fbcdn.net/v/t39.30808-6/422825466_122094488636203922_2462579010761666209_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeFEU19_U4Oy_zCQxjiP9PMs8uxhibxL_OPy7GGJvEv84y8S_g-px7eAw6tYN65kd8ZvmaL_puHu5CAzz-ocdpFe&_nc_ohc=ZLDCJ0iektMQ7kNvwHSFXIX&_nc_oc=AdkyNWbLjeR1TxMsso5hjXnvxPWP9FFXSXMvGleqra2EDdi8NL50m6zsVmdaQcmJyp4&_nc_zt=23&_nc_ht=scontent.fcrk3-2.fna&_nc_gid=36CThoRpURUkix32rmw61g&oh=00_AfHIXWyvW-gdxFo2u62EvIS1wzvTqhTRkPxLOFn2sOfqJg&oe=68149BFF" alt="Footer Ice Cream">
 
   <script>
-    document.body.addEventListener('click', function () {
-      const audio = document.getElementById('bg-music');
-      audio.play();
-    }, { once: true });
+    const productPrices = {
+      Yogurt: 59,
+      Vanilla: 59,
+      Mix: 59
+    };
+
+    function submitOrder() {
+      const products = ['Yogurt', 'Vanilla', 'Mix'];
+      let selectedProducts = [];
+      let grandTotal = 0;
+
+      products.forEach(product => {
+        const amount = parseInt(document.getElementById(product).value);
+        const userPrice = parseFloat(document.getElementById(`${product}Price`).value);
+
+        // Use user's input price if available, otherwise use the default price
+        const price = isNaN(userPrice) ? productPrices[product] : userPrice;
+        
+        if (amount > 0) {
+          const subtotal = amount * price;
+          grandTotal += subtotal;
+          selectedProducts.push({ name: product, qty: amount, subtotal: subtotal });
+
+          const url = 'https://script.google.com/macros/s/AKfycbz9PFOazU4dJlDBYi30tC0hFHURzjGm1I0yAhaXy8kr7DNscpC8lH6FQVTGFgjUppx8/exec'
+                      + `?product=${encodeURIComponent(product)}&amount=${encodeURIComponent(amount)}`;
+
+          fetch(url)
+            .then(response => response.text())
+            .then(data => {
+              console.log(`${product} updated: ${data}`);
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            });
+        }
+      });
+
+      if (selectedProducts.length === 0) {
+        alert('Please select at least one product.');
+        return;
+      }
+
+      const now = new Date();
+      document.getElementById('date').innerText = now.toLocaleString();
+      const receiptItems = document.getElementById('receipt-items');
+      receiptItems.innerHTML = '';
+
+      selectedProducts.forEach(item => {
+        receiptItems.innerHTML += `
+          <div class="item">
+            <span>${item.name} x${item.qty}</span>
+            <span>₱${item.subtotal}</span>
+          </div>
+        `;
+      });
+
+      document.getElementById('total-price').innerText = '₱' + grandTotal;
+      document.getElementById('receipt').style.display = 'block';
+
+      // Hide non-receipt content before printing
+      document.getElementById('products').style.display = 'none';
+      document.querySelector('button').style.display = 'none';
+
+      setTimeout(() => {
+        window.print();
+        // Restore hidden elements after printing
+        document.getElementById('products').style.display = 'block';
+        document.querySelector('button').style.display = 'block';
+      }, 500);
+    }
   </script>
+
 </body>
 </html>
