@@ -101,15 +101,6 @@
       width: 80px;
     }
 
-    /* Updated logo styles */
-    img.header-logo {
-      max-width: 220px;
-      height: auto;
-      margin-bottom: 20px;
-      border-radius: 15px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-
     img.circle-logo {
       max-width: 120px;
       height: 120px;
@@ -119,7 +110,6 @@
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
 
-    /* Mobile friendly adjustments */
     @media screen and (max-width: 600px) {
       body {
         padding: 10px;
@@ -135,7 +125,6 @@
 </head>
 <body>
 
-  <!-- Circular logo (footer) -->
   <img class="circle-logo" src="https://scontent.fcrk3-2.fna.fbcdn.net/v/t39.30808-6/422825466_122094488636203922_2462579010761666209_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeFEU19_U4Oy_zCQxjiP9PMs8uxhibxL_OPy7GGJvEv84y8S_g-px7eAw6tYN65kd8ZvmaL_puHu5CAzz-ocdpFe&_nc_ohc=ZLDCJ0iektMQ7kNvwHSFXIX&_nc_oc=AdkyNWbLjeR1TxMsso5hjXnvxPWP9FFXSXMvGleqra2EDdi8NL50m6zsVmdaQcmJyp4&_nc_zt=23&_nc_ht=scontent.fcrk3-2.fna&_nc_gid=36CThoRpURUkix32rmw61g&oh=00_AfHIXWyvW-gdxFo2u62EvIS1wzvTqhTRkPxLOFn2sOfqJg&oe=68149BFF" alt="Footer Ice Cream">
 
   <h1>Order</h1>
@@ -143,18 +132,18 @@
   <div id="products">
     <div class="product-selection">
       <label>Yogurt</label>
-      <input type="number" id="Yogurt" value="0" min="0">
-      <input type="text" id="YogurtPrice" placeholder="Price" value="50">
+      <input type="number" id="Yogurt" value="0" min="0" onchange="updatePriceBoxes('Yogurt')">
+      <div id="YogurtPriceBoxes"></div>
     </div>
     <div class="product-selection">
       <label>Vanilla</label>
-      <input type="number" id="Vanilla" value="0" min="0">
-      <input type="text" id="VanillaPrice" placeholder="Price" value="30">
+      <input type="number" id="Vanilla" value="0" min="0" onchange="updatePriceBoxes('Vanilla')">
+      <div id="VanillaPriceBoxes"></div>
     </div>
     <div class="product-selection">
       <label>Mix</label>
-      <input type="number" id="Mix" value="0" min="0">
-      <input type="text" id="MixPrice" placeholder="Price" value="40">
+      <input type="number" id="Mix" value="0" min="0" onchange="updatePriceBoxes('Mix')">
+      <div id="MixPriceBoxes"></div>
     </div>
   </div>
 
@@ -174,7 +163,6 @@
     <p class="small">Thank you for cooling off with us! ❄️</p>
   </div>
 
-  <!-- Circular logo (footer) -->
   <img class="circle-logo" src="https://scontent.fcrk3-2.fna.fbcdn.net/v/t39.30808-6/422825466_122094488636203922_2462579010761666209_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeFEU19_U4Oy_zCQxjiP9PMs8uxhibxL_OPy7GGJvEv84y8S_g-px7eAw6tYN65kd8ZvmaL_puHu5CAzz-ocdpFe&_nc_ohc=ZLDCJ0iektMQ7kNvwHSFXIX&_nc_oc=AdkyNWbLjeR1TxMsso5hjXnvxPWP9FFXSXMvGleqra2EDdi8NL50m6zsVmdaQcmJyp4&_nc_zt=23&_nc_ht=scontent.fcrk3-2.fna&_nc_gid=36CThoRpURUkix32rmw61g&oh=00_AfHIXWyvW-gdxFo2u62EvIS1wzvTqhTRkPxLOFn2sOfqJg&oe=68149BFF" alt="Footer Ice Cream">
 
   <script>
@@ -184,6 +172,21 @@
       Mix: 59
     };
 
+    function updatePriceBoxes(product) {
+      const quantity = parseInt(document.getElementById(product).value);
+      const priceBoxContainer = document.getElementById(`${product}PriceBoxes`);
+      priceBoxContainer.innerHTML = ''; // Clear existing boxes
+
+      for (let i = 0; i < quantity; i++) {
+        const priceBox = document.createElement('input');
+        priceBox.type = 'text';
+        priceBox.id = `${product}Price${i + 1}`;
+        priceBox.placeholder = `Price for ${product} ${i + 1}`;
+        priceBox.style.marginTop = '5px';
+        priceBoxContainer.appendChild(priceBox);
+      }
+    }
+
     function submitOrder() {
       const products = ['Yogurt', 'Vanilla', 'Mix'];
       let selectedProducts = [];
@@ -191,18 +194,27 @@
 
       products.forEach(product => {
         const amount = parseInt(document.getElementById(product).value);
-        const userPrice = parseFloat(document.getElementById(`${product}Price`).value);
+        const userPrices = [];
+        let productValid = false;
 
-        // Use user's input price if available, otherwise use the default price
-        const price = isNaN(userPrice) ? productPrices[product] : userPrice;
-        
-        if (amount > 0) {
-          const subtotal = amount * price;
+        for (let i = 0; i < amount; i++) {
+          const userPrice = parseFloat(document.getElementById(`${product}Price${i + 1}`).value);
+          if (!isNaN(userPrice) && userPrice > 0) {
+            productValid = true;
+            userPrices.push(userPrice);
+          }
+        }
+
+        if (amount > 0 && productValid) {
+          let subtotal = 0;
+          userPrices.forEach(price => {
+            subtotal += price;
+          });
           grandTotal += subtotal;
           selectedProducts.push({ name: product, qty: amount, subtotal: subtotal });
 
           const url = 'https://script.google.com/macros/s/AKfycbz9PFOazU4dJlDBYi30tC0hFHURzjGm1I0yAhaXy8kr7DNscpC8lH6FQVTGFgjUppx8/exec'
-                      + `?product=${encodeURIComponent(product)}&amount=${encodeURIComponent(amount)}`;
+                      + `?product=${encodeURIComponent(product)}&amount=${encodeURIComponent(amount)}&price=${encodeURIComponent(userPrices.join(','))}`;
 
           fetch(url)
             .then(response => response.text())
